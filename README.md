@@ -1,8 +1,14 @@
-# Laravel 13 + React + Inertia 3 + Tailwind CSS 4 + Docker
+# laravel-boilerplate-docker
 
-Base de desarrollo **sin starter kits**: Laravel 13, PHP 8.4, React 19, Inertia 3, Tailwind CSS 4, Vite 8, MySQL 8.4 y phpMyAdmin. Docker Compose levanta PHP-FPM, Nginx, Node/Vite, MySQL y phpMyAdmin.
+Boilerplate open source para crear aplicaciones con **Laravel 13, React 19 e Inertia.js 3**, preparado para desarrollo local con Docker Compose. Incluye PHP 8.4, Tailwind CSS 4, Vite 8, MySQL 8.4 y phpMyAdmin. No utiliza un starter kit de autenticación.
 
-> **Qué incluye el ZIP:** estructura Laravel y archivos propios de integración React/Inertia/Docker. **Durante el primer arranque**, Docker ejecuta `composer create-project laravel/laravel ... --no-install` para recuperar directamente la distribución oficial y copiar cualquier archivo base faltante, **sin sobrescribir** los archivos ya configurados. Luego instala `vendor` dentro del volumen Docker. El frontend instala `node_modules` en otro volumen Docker. No se incluye `vendor`, `node_modules` ni los lockfiles generados por las instalaciones (se crearán al iniciar, en el proyecto solo los lockfiles).
+> **Qué ofrece el repositorio:** una base Laravel con la integración de React, Inertia y Docker ya configurada. En el primer arranque, Docker obtiene la distribución oficial de Laravel y completa los archivos base que hagan falta sin sobrescribir los archivos configurados. Composer y NPM instalan sus dependencias en volúmenes Docker. Los directorios `vendor` y `node_modules` no se guardan en el repositorio; `composer.lock` y `package-lock.json` sí están versionados para mantener dependencias reproducibles.
+
+## Open source y contribuciones
+
+Puedes usar este repositorio como punto de partida, proponer mejoras o reportar problemas desde la página de GitHub donde esté alojado. La guía del proyecto está en [`AGENTS.md`](AGENTS.md) y la documentación técnica en [`docs/`](docs/).
+
+**Licencia:** este repositorio aún no incluye un archivo `LICENSE`, por lo que no tiene una licencia open source declarada. Consulta al mantenedor antes de reutilizar o redistribuir el código.
 
 ## Requisitos
 
@@ -12,7 +18,28 @@ Base de desarrollo **sin starter kits**: Laravel 13, PHP 8.4, React 19, Inertia 
 
 ## Iniciar (Windows PowerShell, CMD, macOS o Linux)
 
-Descomprime el ZIP, abre una terminal **dentro de la carpeta del proyecto**. Antes de iniciar, crea `.env` a partir de `.env.example` y reemplaza `change-me-local` por contraseñas propias para MySQL y root. El archivo `.env` permanece local y no se incluye en GitHub.
+Clona el repositorio y entra en su directorio. Sustituye `<URL-del-repositorio>` por la URL GitHub correspondiente:
+
+```bash
+git clone <URL-del-repositorio>
+cd laravel-boilerplate-docker
+```
+
+Antes de iniciar, crea `.env` a partir de `.env.example` y reemplaza `change-me-local` por contraseñas propias para MySQL y root. El archivo `.env` permanece local y no se incluye en GitHub.
+
+En PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+En macOS o Linux:
+
+```bash
+cp .env.example .env
+```
+
+Edita `.env` y configura tus contraseñas locales antes de levantar los servicios:
 
 ```bash
 docker compose up -d --build
@@ -34,7 +61,7 @@ Cuando ambos servicios estén listos:
 | MySQL desde tu PC | 127.0.0.1:3307 |
 | MySQL desde PHP en Docker | db:3306 |
 
-**Acceso phpMyAdmin:** servidor `db`. Usa el usuario y la contraseña definidos en tu archivo local `.env`. Antes de iniciar, copia `.env.example` como `.env` y reemplaza `change-me-local` por contraseñas propias. No publiques el archivo `.env` ni uses estas credenciales de desarrollo en producción.
+**Acceso phpMyAdmin:** servidor `db`. Usa el usuario y la contraseña definidos en tu archivo local `.env`. No publiques ese archivo ni uses credenciales de desarrollo en producción.
 
 ## Migraciones
 
